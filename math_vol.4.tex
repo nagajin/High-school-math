@@ -1,0 +1,530 @@
+\documentclass[b5paper,uplatex,dvipdfmx,fleqn]{jsarticle}
+
+\usepackage[top=1.5cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{bxpapersize}
+\usepackage{fancybox}
+\usepackage{tcolorbox}
+\tcbuselibrary{raster,skins}
+\usepackage{otf}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb,ascmac}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{framed, color}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\tcbuselibrary{raster,skins}
+
+
+\definecolor{shadecolor}{gray}{0.80}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}[section]
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{ass}[thm]{仮定}
+\newtheorem{conj}[thm]{予想}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注}
+\newtheorem{fprb}[thm]{例題}
+\newtheorem{prb}[thm]{問題}
+\newtheorem*{eg}{例}
+\newtheorem*{pf}{証明}
+\newtheorem*{sol}{解答}
+\newtheorem*{rem*}{注}
+
+
+%%tcolorboxの定義
+\newcounter{reidaibangou}
+\newtcolorbox{reidai}[1][]{enhanced,boxrule=0.5mm,
+    top=2pt,left=44pt,right=4pt,bottom=2pt,arc=0mm,
+    colframe=black!30!gray,
+    boxrule=1pt,
+    underlay={
+    \node[inner sep=1pt,black!50!black]at ([xshift=22pt,yshift=-10pt]interior.north west) {\stepcounter{reidaibangou}\bfseries\gtfamily 例題\thereidaibangou};},
+    segmentation code={%
+    \draw[dashed] (segmentation.west)--(segmentation.east);
+    \node[inner sep=1pt,black!50!black] at ([xshift=22pt,yshift=-9pt]segmentation.south west) {\bfseries\gtfamily 解答};},
+    before upper={\setlength{\parindent}{1zw}},
+    before lower={\setlength{\parindent}{1zw}},
+}
+
+
+\renewcommand{\labelenumi}{(\theenumi)\ }
+
+\renewcommand{\thepart}{\arabic{part}}
+
+\renewcommand{\baselinestretch}{1.3}
+
+\renewcommand{\thesubsection}{問題\arabic{subsection}}
+
+\begin{document}
+
+\renewcommand{\postpartname}{講}
+
+\part{指数関数}
+\noindent
+\hrule height 0.5pt depth 0.5pt width 10cm
+\vspace{0.5cm}
+\noindent
+\colorbox{black}{\textcolor{white}{\textgt{\large 基本事項}}}\vspace{0.4cm}\\
+\textgt{\large \ajvarDiamond\ 指数法則}\vspace{0.2cm}\\
+\setcounter{section}{1}
+\textgt{❶ 指数法則}\vspace{0.2cm}
+
+「文字 $a$ を $n$ 個掛け合わせたもの」を \textgt{$\boldsymbol{a}$ の $\boldsymbol{n}$ 乗} といい，$\boldsymbol{a^{n}}$ と書く（特に，$n = 1$ のとき $a^{1}$ を省略して $a$ と書く）．ここで，$a^{n}$ の $n$ を 累乗の\textgt{指数} といい，$\boldsymbol{a}$ を \textgt{底} という．このときの $a$ は 正数とは限らず，$0$ や 負数でも良い（複素数でも成り立つ）．
+
+今まで，中等学校以前で学習した累乗の指数は「正の整数」であったが，これを「任意の整数」に拡張することができる．細かい説明を除けば，次の \textgt{指数法則} が成り立つ．\vspace{0.2cm}
+
+\begin{tcolorbox}[title=\textgt{指数法則},sharp corners]
+$m,\; n$ は整数で，$ab \neq 0$ とする．このとき，次の指数法則が成り立つ．
+\begin{enumerate}
+\item
+$\boldsymbol{a^{m}a^{n} = a^{m + n}}$
+\item
+$\boldsymbol{(a^{m})^{n} = a^{mn}}$
+\item
+$\boldsymbol{(ab)^{n} = a^{n}b^{n}}$
+\end{enumerate}
+\end{tcolorbox}\vspace{0.2cm}
+
+特に，$k$ が正整数で $a \neq 0$ のとき，$\displaystyle \boldsymbol{a^{-k} = \frac{1}{a^{k}}}$ と定義されることは注意されたい．\\
+
+この法則から，様々な「指数計算の定理」を導くことができる．例えば
+\[
+\left( \frac{b}{a} \right)^{n} = \frac{b^{n}}{a^{n}}\;\;\; (a \neq 0)
+\]
+となる．これを証明してみよう．
+
+指数法則の (3)，(2) を用いると，
+\[
+\left( \frac{b}{a} \right)^{n} = (ba^{-1})^{n} = b^{n}(a^{-1})^{n} = b^{n}a^{-n} = \frac{b^{n}}{a^{n}}
+\]
+のようになる．
+
+\newpage
+\noindent
+\textgt{❷ 累乗根}\vspace{0.2cm}
+
+$n$ を正整数とするとき，「$n$ 乗して $a$ になる数」を \textgt{$\boldsymbol{a}$ の $\boldsymbol{n}$ 乗根} といい，$\boldsymbol{\sqrt[n]{a}}$ と書く．$2$ 乗根，$3$ 乗根，$4$ 乗根，$\cdots$ をまとめて \textgt{累乗根} という．以下に累乗根の性質をまとめる．\vspace{0.2cm}
+
+\begin{tcolorbox}[title=\textgt{累乗根の性質},sharp corners]
+$a \geqq 0,\; b \geqq 0,\; m,\; n$ を正整数とするとき，次が成り立つ．
+\begin{enumerate}
+\item
+$\displaystyle \boldsymbol{\sqrt[m]{a}\sqrt[m]{b} = \sqrt[m]{ab}}$\vspace{0.2cm}
+\item
+$\displaystyle \boldsymbol{\frac{\sqrt[m]{a}}{\sqrt[m]{b}} = \sqrt[m]{\mathstrut \frac{\,a\,}{b}},\;\; (b \neq 0)}$\vspace{0.2cm}
+\item
+$\boldsymbol{(\sqrt[n]{a})^{m} = \sqrt[n]{a^{m}}}$\vspace{0.2cm}
+\item
+$\boldsymbol{\sqrt[m]{\sqrt[n]{a}} = \sqrt[mn]{a}}$
+\end{enumerate}
+\end{tcolorbox}\vspace{0.2cm}
+
+\noindent
+\textgt{❸ 指数の有理数への拡張}\vspace{0.2cm}
+
+「指数」を「有理数」まで拡張して，意味を持たせることができる．例えば，$a^{\frac{1}{3}}$ などである．
+
+\begin{tcolorbox}[title=\textgt{分数（有理数）指数の定義},sharp corners]
+$a >0$ で，$m$ を任意の整数，$n$ を任意の正整数とするとき
+\[
+\boldsymbol{a^{\frac{m}{n}} = \sqrt[n]{a^{m}}}
+\]
+である．
+\end{tcolorbox}\vspace{0.2cm}
+
+\noindent
+\textgt{❹ 指数の大小関係}\vspace{0.2cm}
+
+指数の大小関係の同値性をまとめる．
+
+$a > 1$ のとき，
+\[
+\boldsymbol{a^{x} < a^{y}\;\; \Leftrightarrow\;\; x < y}
+\]
+
+$0 < a < 1$ のとき，
+\[
+\boldsymbol{a^{x} < a^{y}\;\; \Leftrightarrow\;\; x > y}
+\]
+
+\newpage
+「数の分類」をすると
+\[
+\textgt{実数} \begin{cases}
+\textgt{有理数} \cdots \text{分数で表される数}\\
+\textgt{無理数} \cdots \text{分数では表されない数}
+\end{cases}
+\]
+であるが，実は無理数も指数に取り入れることができ，例えば
+\[
+1 < \sqrt{3} < 2
+\]
+であるから
+\[
+2 < 2^{\sqrt{3}} < 2^{2} = 4
+\]
+などと評価できる．\vspace{1cm}
+
+
+\begin{reidai}
+次の式を計算し，簡単にせよ．
+\begin{multicols}{3}
+\begin{enumerate}
+\item
+$\sqrt[3]{5} \div \sqrt[12]{5} \times \sqrt[8]{25}$
+\item
+$\sqrt{6} \times \sqrt[4]{54} \div \sqrt[4]{6}$
+\item
+$(3^{-2} \times 9^{\frac{2}{3}})^{\frac{3}{2}}$
+\end{enumerate}
+\end{multicols}\vspace{0.2cm}
+
+\tcblower
+
+
+\begin{align*}
+(1)\hspace{0.5cm}\sqrt[3]{5} \div \sqrt[12]{5} \times \sqrt[8]{25}
+&= 5^{\frac{1}{3}} \div 5^\frac{1}{12} \times 5^\frac{1}{4}\;\;\; (\because\, \sqrt[8]{25} = \sqrt[8]{5^{2}}) \\
+&= 5^{\frac{1}{3} - \frac{1}{12} + \frac{1}{4}} \\
+&= 5^{\frac{1}{2}} = \boldsymbol{\sqrt{5}}.
+\end{align*}
+
+\begin{align*}
+(2)\hspace{0.5cm}\sqrt{6} \times \sqrt[4]{54} \div \sqrt[4]{6} 
+&= \sqrt{6} \times \sqrt[4]{3^{2}} \cdot \sqrt[4]{6} \div \sqrt[4]{6} \\
+&= 6^{\frac{1}{2}} \times 3^{\frac{1}{2}} \cdot 6^{\frac{1}{4}} \div 6^{\frac{1}{4}} \\
+&= 6^{\frac{1}{2}} \cdot 3^{\frac{1}{2}} = \boldsymbol{\sqrt{18}}.
+\end{align*}
+
+\begin{align*}
+(3)\hspace{0.5cm}(3^{-2} \times 9^{\frac{2}{3}})^{\frac{3}{2}}
+&= 3^{-3} \times 3^{2} \\[10pt]
+&= \boldsymbol{\frac{1}{\,3\,}}.
+\end{align*}
+
+\vspace{0cm}
+\end{reidai}
+
+
+\newpage
+\noindent
+\textgt{\large \ajvarDiamond\ 指数関数}\vspace{0.2cm}\\
+\setcounter{section}{2}
+\setcounter{thm}{0}
+\noindent
+\textgt{❺ 指数関数のグラフ}\vspace{0.2cm}
+
+$a$ が $1$ でない正数であるとき，関数
+\[
+\boldsymbol{y = a^{x}}\;\;\;\; (a > 0,\; a \neq 1)
+\]
+を \textgt{$\boldsymbol{a}$ を底とする指数関数} という．指数関数のグラフの概形は次の図のようになる．\\
+
+\begin{tikzpicture}
+  \draw [-stealth] (-3,0) -- (3,0)node[right]{$x$};
+  \draw [-stealth] (0, -1) -- (0,4.5)node[left]{$y$};
+  \draw [thick] plot[domain=-3:2.15] (\x, {pow(2,\x)});
+  \draw (0,0)node[below left]{O};
+  \draw [dashed] (1,0)node[below]{$1$} -- (1,2) -- (0,2)node[left]{$a$}; 
+  \draw [dashed] (2,0)node[below]{$2$} -- (2,4) -- (0,4)node[left]{$a^{2}$}; 
+  \draw [dashed] (-1,0)node[below]{$-1$} -- (-1,1/2) -- (0,1/2)node[right]{$\dfrac{1}{\,a\,}$}; 
+  \draw (-0.7,3)node[left]{$\boldsymbol{a > 1}$ \textgt{の場合}};
+  \draw (0,1)node[above left]{$1$};
+\end{tikzpicture}\ \ \ \ 
+\begin{tikzpicture}
+  \draw [-stealth] (-3,0) -- (3,0)node[right]{$x$};
+  \draw [-stealth] (0, -1) -- (0,4.5)node[left]{$y$};
+  \draw [thick] plot[domain=-2.15:3] (\x, {pow(1/2,\x)});
+  \draw (0,0)node[below left]{O};
+  \draw [dashed] (-1,0)node[below]{$-1$} -- (-1,2) -- (0,2)node[right]{$\dfrac{1}{\,a\,}$}; 
+  \draw [dashed] (-2,0)node[below]{$-2$} -- (-2,4) -- (0,4)node[right]{$\dfrac{1}{\,a^{2}\,}$}; 
+  \draw [dashed] (1,0)node[below]{$1$} -- (1,1/2) -- (0,1/2)node[left]{$a$}; 
+  \draw (0.7,3)node[right]{$\boldsymbol{0 < a < 1}$ \textgt{の場合}};
+  \draw (0,1)node[above right]{$1$};
+\end{tikzpicture}\vspace{0.2cm}
+
+\begin{tcolorbox}[title=\textgt{指数関数のグラフの特徴},sharp corners]
+$y = a^{x} := f(x) \;\; (a > 0,\; a \neq 1)$ のグラフは，
+\begin{enumerate}
+\item
+定点 $(0, 1)$ を通る．
+\item
+$x$ 軸の上側にある．（常に $y > 0$ である）
+\item
+$a > 1$ のとき増加で，$0 < a < 1$ のとき減少である．\vspace{0.2cm}
+\item[($*$)\ ]
+$y = a^{x}$ と $y = (a^{-1})^{x} = \dfrac{1}{\,a^{x}\,}$ は $y$ 軸対称．\vspace{0.1cm}\\
+実は上の図において，左は $a = 2$，右は $a = \dfrac{1}{\,2\,}$ のときのグラフである．
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\textgt{補　グラフの平行移動}\\
+\indent
+曲線 $y = f(x)$ を $x$ 軸方向に $a$，$y$ 軸方向に $b$ だけ平行移動して得られる曲線の方程式は，
+\[
+y - b = f(x - a).
+\]
+\end{tcolorbox}
+
+\begin{reidai}
+次のグラフを書け．
+\begin{multicols}{2}
+\begin{enumerate}
+\item
+$y = \left( \dfrac{\,1\,}{3} \right)^{x}$\vspace{0.2cm}
+\item
+$y = 2 \cdot 3^{x} - 1$
+\end{enumerate}
+\end{multicols}\vspace{0.2cm}
+
+\tcblower
+
+\begin{enumerate}
+\item \phantom{a}\\
+\begin{tikzpicture}
+  \draw [-stealth] (-3,0) -- (3,0)node[right]{$x$};
+  \draw [-stealth] (0, -1) -- (0,5.3)node[left]{$y$};
+  \draw [thick] plot[domain=-1.5:3] (\x, {pow(1/3,\x)});
+  \draw (0,0)node[below left]{O};
+  \draw [dashed] (-1,0)node[below]{$-1$} -- (-1,3) -- (0,3)node[right]{$3$};
+  \draw [dashed] (1,0)node[below]{$1$} -- (1,1/3) -- (0,1/3)node[above=5, left=2]{$\dfrac{1}{\,3\,}$};
+  \draw (0,1)node[above right]{$1$};
+\end{tikzpicture}
+\item \phantom{a}\\
+\begin{tikzpicture}
+  \draw [-stealth] (-3,0) -- (3,0)node[right]{$x$};
+  \draw [-stealth] (0, -2) -- (0,6)node[left]{$y$};
+  \draw [thick] plot[domain=-3:1.13] (\x, {2*pow(3,\x) - 1});
+  \draw (0,0)node[above right]{O};
+  \draw [dashed] (1,0)node[below]{$1$} -- (1,5) -- (0,5)node[left]{$5$}; 
+  \draw [dashed] (-1,0)node[above]{$-1$} -- (-1,-1/3) -- (0,-1/3)node[below=5, right=2]{$-\dfrac{1}{\,3\,}$};
+  \draw (0,1)node[above left]{$1$};
+  \draw [dashed] (-3,-1) -- (3,-1);
+  \draw (0,-1)node[below right]{$-1$};
+\end{tikzpicture}
+\end{enumerate}
+
+\vspace{0cm}
+\end{reidai}
+
+\newpage
+\noindent
+\textgt{\large \ajvarDiamond\ 指数方程式・不等式}\vspace{0.2cm}\\
+\setcounter{section}{1}
+\textgt{❻ 指数方程式}\vspace{0.2cm}
+
+指数方程式の基本系は，$\boldsymbol{f(a^{x}) = 0}$ の形のものである．これは $a^{x} = X$ と置き換えることによって
+\[
+f(X) = 0\;\;\; (X > 0)
+\]
+を解くことに帰着する．不等式も同様に置き換えて解けば良い．以下実例で確認しよう．
+
+\begin{reidai}
+次の方程式を解け．
+
+(1)\ \ 
+$2^{3x + 2} - 4^{x} + 2^{x + 1} - 5 = 0$ \hspace{2cm}
+(2)\ \ 
+$\displaystyle \begin{cases}
+2^{x} + 2^{y} = 40 \\
+2^{x + y} = 256
+\end{cases}$
+
+\tcblower
+
+\noindent
+(1)\ \ $2^{x}$ を $X (>0)$ とおく．
+\[
+2^{3x + 2} = 4 \cdot (2^{x})^{3} = 4X^{3},\;\; 4^{x} = (2^{x})^{2} = X^{2},\;\; 2^{x + 1} = 2 \cdot 2^{x} = 2X
+\]
+であるから，与式は
+\[
+4X^{3} - X^{2} + 2X - 5 = 0\;\; \Leftrightarrow\;\; (X - 1)(4X^{2}  +3X + 5) = 0
+\]
+である．$X > 0$ であるから，常に $4X^{2} + 3X + 5 > 0$ が成り立つので
+\[
+X = 2^{x} = 1.\;\;\; \therefore\; \boldsymbol{x = 0}.
+\]
+
+\noindent
+(2)\ \ $2^{x} = X,\; 2^{y} = Y$ とおくと，$2^{x + y} = 2^{x} \cdot 2^{y} = XY$ であるから
+\[
+\begin{cases}
+X + Y = 40 \\
+XY = 256
+\end{cases}.
+\]
+
+$X,\; Y$ は $2$ 次方程式 $t^{2} - 40t + 256 = (t - 8)(t - 32) = 0$ の根であるから
+\[
+\begin{cases}
+X = 2^{x} = 8 \\
+Y = 2^{x} = 32
+\end{cases} \text{または}\;\;\; \begin{cases}
+X = 32 \\
+Y = 8
+\end{cases}.
+\]
+
+\[
+\therefore\; \boldsymbol{\left(\begin{array}{c} x \\ y \end{array}\right) = \left(\begin{array}{c} 3 \\ 5 \end{array}\right) \textgt{または} \left(\begin{array}{c} 5 \\ 3 \end{array}\right)}.
+\]
+
+\vspace{0.21cm}
+
+\end{reidai}
+
+\begin{reidai}
+次の不等式を解け．\vspace{0.2cm}
+
+\noindent
+(1)
+$2^{x} + 2^{-x} < \dfrac{\,17\,}{4}$\hspace{2cm}
+(2)
+$\left( \dfrac{\,1\,}{2} \right)^{2x} < \left( \dfrac{\,1\,}{2} \right)^{x^{2}}$\vspace{0.4cm}\\
+(3)
+$8^{x + 1} - 4^{x + \frac{3}{2}} + 2^{x + 1}(1 - 2^{x}) < 0$\vspace{0.2cm}
+
+\tcblower
+
+\noindent
+(1)\ \ 
+$2^{x} = X (> 0)$ とおくと，$2^{-x} = \dfrac{1}{\,X\,}$ であるから，所与の式は
+\[
+X + \frac{\,1\,}{X} < \frac{\,17\,}{4}
+\]
+となり，$X > 0$ であるから分母を払い整理すると
+\[
+4X^{2} - 17X + 4 = (4X - 1)(X - 4) < 0.
+\]
+\[
+\therefore\; \frac{\,1\,}{4} < X < 4.\;\;\;\;\;\; \therefore\; \boldsymbol{-2 < x < 2}.
+\]
+
+\vspace{0.4cm}
+
+\noindent
+(2)\ \ 
+$\left( \dfrac{\,1\,}{2} \right)^{x}$ は 単調に減少する関数であるから，
+\[
+2x > x^{2}\;\; \Leftrightarrow\;\; x(x - 2) < 0.
+\]
+\[
+\therefore\; \boldsymbol{0 < x < 2}.
+\]
+
+\vspace{0.4cm}
+
+\noindent
+(3)\ \ 
+$2^{x} = X$ とおくと，
+\[
+8^{x + 1} = 8X^{3},\;\; 4^{x + \frac{3}{2}} = 8X^{2},\;\; 2^{x + 1} = 2X
+\]
+であるから，所与の式は
+\[
+8X^{3} - 8X^{2} + 2X(1 - X) < 0\;\; \Leftrightarrow\;\; 8X^{3} - 10X^{2} + 2X < 0.
+\]
+すなわち，
+\[
+2X(X - 1)(4X - 1) < 0.
+\]
+$X > 0$ より，
+\[
+\frac{\,1\,}{4} < X < 1.\;\;\; \therefore\; \boldsymbol{-2 < x < 0}
+\]
+である．
+\vspace{0.55cm}
+
+\end{reidai}
+
+\newpage
+\noindent
+\colorbox{black}{\textcolor{white}{\textgt{\large 演習問題}}}
+\begin{prb}
+方程式
+\[
+4^{x} - 3 \cdot 2^{x} + 3 \cdot 2^{-x} + 4^{-x} = 0
+\]
+について，次の問いに答えなさい．
+\begin{enumerate}
+\item
+$X = 2^{x} - 2^{-x}$ とおくとき，上の方程式を $X$ の式で表しなさい．
+\item
+上の方程式の実数解 $x$ をすべて求めなさい．
+\end{enumerate}
+\end{prb}\vfill
+
+\begin{prb}
+方程式
+\[
+2^{x} - (\sqrt{2})^{x + 1} - 4 = 0
+\]
+を解け．
+\end{prb}\vfill
+
+\begin{prb}
+実数 $k$ を定数とする．$x$ と $y$ に関する連立方程式
+\[
+\begin{cases}
+2^{x + 1} + 3^{y} = 2 \\
+k \cdot 2^{x} - 3^{y} = 3k - 1
+\end{cases}
+\]
+の解が存在するような $k$ の値の範囲は $\frac{\;\;\;\fbox{\;\; \textbf{シ}\;\; }\fbox{\;\; \textbf{ス}\;\; }\;\;\;}{\;\;\;\fbox{\;\; \textbf{セ}\;\; }\;\;\;} < k < \frac{\;\;\;\fbox{\;\; \textbf{ソ}\;\; }\;\;\;}{\;\;\;\fbox{\;\; \textbf{タ}\;\; }\;\;\;}$ である．
+\end{prb}\vfill
+
+\newpage
+\begin{prb}
+$0 < x < 2$ を満たす実数 $x$ に関する $2$ つの条件
+\begin{align*}
+&p : 2 \left( \frac{\,1\,}{4} \right)^{2x - 1} - 9 \left( \frac{\,1\,}{4} \right)^{x} + 1 < 0 \\
+&q : \cos \left( \frac{\pi}{2x + 1} \right) \left\{ \cos \left( \frac{\pi}{2x + 1} \right) - \frac{\,1\,}{2} \right\} \left\{ \cos \left( \frac{\pi}{2x + 1} + 2 \right) \right\} < 0
+\end{align*}
+について，以下の問いに答えよ．
+
+\begin{enumerate}
+\item
+条件 $p$ を満たす $x$ の範囲を求めよ．
+\item
+条件 $q$ を満たす $x$ の範囲を求めよ．
+\item
+命題 $p \Rightarrow q$ の真偽を調べよ．また，命題 $p \Rightarrow q$ の裏を述べ，その真偽を調べよ．
+\end{enumerate}
+\end{prb}\vfill
+
+\begin{prb}
+$y > 0$ とするとき，不等式
+\[
+y^{\frac{2}{x}} + y^{-\frac{2}{x}} - 6(y^{\frac{1}{x}} + y^{-\frac{1}{x}}) + 10 \leqq 0
+\]
+について次の各問に答えよ．
+\begin{enumerate}
+\item
+$X = y^{\frac{1}{x}} + y^{-\frac{1}{x}}$ とするとき，この不等式を $X$ を用いて表せ．
+\item
+この不等式を満たす点 $(x, y)$ の全体が表す図形を座標平面上に図示せよ．
+\end{enumerate}
+\end{prb}\vfill
+
+\begin{prb}
+$f(x) = 16 \cdot 9^{x} - 4 \cdot 3^{x + 2} - 3^{-x + 2} + 9^{-x}$ とし，$t = 4 \cdot 3^{x} + 3^{-x}$ とおくとき，以下の問い答えよ．
+\begin{enumerate}
+\item
+$t$ の最小値とそのときの $x$ の値を求めよ．
+\item
+$f(x)$ を $t$ の式で表せ．
+\item
+$x$ の方程式 $f(x) = k$ の相異なる実数解の個数が $3$ 個であるとき，定数 $k$ の値と，$3$ つの実数解を求めよ．
+\end{enumerate}
+\end{prb}\vfill
+
+
+\end{document}
